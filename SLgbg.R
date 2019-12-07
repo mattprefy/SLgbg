@@ -3,6 +3,9 @@ library(tibbletime)
 #library(tidyquant)
 library(lubridate)
 library(png)
+library(shiny)
+library(DT)
+library(shinydashboard)
 
 ##Create Categories For Reporting
 
@@ -484,8 +487,6 @@ dateTable <- read.csv("/Users/mprefontaine/True North Sports & Entertainment L/W
   select(GameDate, id = GameReferenceId, Team, Opponent, Outcome, TOI_5v5 = `5v5`, TOI_5v4 = `5v4`, TOI_4v5 = `4v5`) %>% 
   distinct()
 
-
-str(dateTable)
 ##creates a dataframe from the previously defined directory and adds a source column
 ##column ID reflects the file name of the individual csv where the data is extracted.
 rawData <- read.csv("/Users/mprefontaine/True North Sports & Entertainment L/Winnipeg Jets Analytics - Documents/General/NHL Post-Game Reports.csv",row.names = NULL,  check.names=FALSE) %>% 
@@ -494,18 +495,92 @@ rawData <- read.csv("/Users/mprefontaine/True North Sports & Entertainment L/Win
   mutate(GameDate = GameDate %>% as.character %>%  as.Date(format = "%Y-%m-%d")) %>% 
   distinct()
 
-##Seperates 5v5, 5v4 4v5 and goalie data in their own datafframes
-FiveVFiveRawData <- rawData %>% 
-  select(-contains("5v4"), -contains("4v5"))
+Team_List <- rawData$Team %>% sort()
 
-FiveVFourRawData <- rawData %>% 
-  select(-contains("5v5"), -contains("4v5"))
+Categories <- c("Expected Goals",
+                "Shooting",
+                "Creating Scoring-Chances",
+                "Limiting Scoring-Chances Against",
+                "Powerplay",
+                "Penalty Kill",
+                "Creating OZ Possession-Time",
+                "Limiting OZ Possession-Time Against",
+                "Puck Management",
+                "Goaltending")
 
-FourVFiveRawData <- rawData %>% 
-  select(-contains("5v4"), -contains("5v5"))
+## app.R #
+ui <- dashboardPage(
+  dashboardHeader(title = "SportLogiq GBG"),
+  sidebar,
+  body 
+)
 
-GoalieRawData <- rawData %>% 
-  select(-contains("5v4"))
+
+#Sidebar Content  
+sidebar <- dashboardSidebar(
+  sidebarMenu(
+    #Select the team
+    selectInput("Team", "Select Team", choices = Team_List, selected = "WPG"),
+    selectInput("Categories", "Select Category", choices = `Categories`, selected = "Powerplay"),
+    menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
+    
+      
+    menuItem("Widgets", tabName = "widgets", icon = icon("th"))
+  )
+)
+
+## Body content
+body <- dashboardBody(
+    tabItems(
+      # First tab content
+      tabItem(tabName = "dashboard",
+              fluidRow(
+                box(tableOutput("PP_Raw")),
+                box(plotOutput("plot1", height = 250)),
+                box(
+                  title = "Controls",
+                  sliderInput("slider", "Number of observations:", 1, 100, 50)
+                )
+              )
+      ),
+      
+      # Second tab content
+      tabItem(tabName = "widgets",
+              h2("Widgets tab content")
+              
+      )
+    )
+  )
+
+
+
+server <- function(input, output) {
+  #Main data table 
+  output$maintable <- DT::renderDataTable(
+    DT::datatable({
+  
+  
+  #PP_Raw <- dateData <- merge(rawData, dateTable, by = c("GameDate", "Team")) %>% 
+   # select(GameDate,id, SL_id ,Team ,Opponent, Outcome, TOI_5v4,everything()) %>% 
+    #select(`5v4_info`,`Powerplay`) %>% 
+    #distinct()
+    output$PP_Raw <- renderTable(PP_Raw)
+  
+  
+  
+    set.seed(122)
+    histdata <- rnorm(500)
+  
+    output$plot1 <- renderPlot({
+     data <- histdata[seq_len(input$slider)]
+      hist(data)
+    })
+    }
+    )
+}
+
+
+shinyApp(ui, server)
 
 #########################5 v5########################################
 CC_Raw <- merge(FiveVFiveRawData, dateTable, by = c("GameDate", "Team")) %>% 
@@ -552,7 +627,7 @@ DAL_xGF <- xGF %>%
 
 ###################Powerplay data######################################
 #Combine powerplay Metrics into one data frame giving full NHL gbg breakdown
-PP_Raw <-dateData <- merge(FiveVFourRawData, dateTable, by = c("GameDate", "Team")) %>% 
+PP_Raw <-dateData <- merge(rawData, dateTable, by = c("GameDate", "Team")) %>% 
   select(GameDate,id, SL_id ,Team ,Opponent, Outcome, TOI_5v4,everything()) %>% 
   select(`5v4_info`,`Powerplay`) %>% 
   distinct()
