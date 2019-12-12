@@ -7,7 +7,7 @@ library(shiny)
 library(DT)
 library(shinydashboard)
 
-##Create Categories For Reporting
+#############################Game Info Categories###########################
 
 `5v5_info` <- c("GameDate",
                 "id",
@@ -34,6 +34,15 @@ library(shinydashboard)
                 "Outcome", 
                 "TOI_4v5")
 
+`Info` <- c("GameDate",
+                "id",
+                "SL_id",
+                "Team",
+                "Opponent", 
+                "Outcome", 
+                "TOI")
+
+
 `Goalie` <- c("GameDate",
               "id",
               "SL_id",
@@ -42,6 +51,7 @@ library(shinydashboard)
               "Outcome", 
               "TOI_5v5",
               "TOI_5v5")
+#############################Metric Categories###########################
 
 Categories <- c("Expected Goals",
                 "Shooting",
@@ -54,15 +64,11 @@ Categories <- c("Expected Goals",
                 "Puck Management",
                 "Goaltending")
 
-#Name Categories of Metrics to be put together
+###############################Metrics################################
 `Expected Goals` <- c("5v5ExpectedGoalsFor",
                       "5v5ExpectedGoalsAgainst"
-)
-
-"ESActualtoExpectedGoalsFor",
-
-"SH Expected Goals Against",
-"SH Actual to Expected Goals Against"
+                      #"5v5ActualtoExpectedGoalsFor"
+                      )
 
 `Shooting`<-c("5v5ShotAttemptsFor",
               "5v5ShotAttemptsAgainst",
@@ -75,7 +81,6 @@ Categories <- c("Expected Goals",
               "5v5%ofShotsOnNetThatAreScreened",
               "5v5%Face-OffsWonR5v5ultinginShotOnNet",
               "5v5GoalsScored")
-
 
 `Creating Scoring-Chances`<-c("5v5ExpectedGoalsFor",
                               "5v5ShotAttemptsFromSlotFor",
@@ -145,33 +150,73 @@ Categories <- c("Expected Goals",
                                  "5v5ShotsOnNetFromSlotOffofOZPlay",
                                  "5v5ShotsOnNetFromSlotOffofOZPlay_60")
 
+`LimitingScoring-ChancesAgainst`<-c("5v5ShotAttemptsFromSlotAgainst",
+                                    "5v5ShotsOnNetFromSlotAgainst",
+                                    "5v5%ofOppositionShotAttemptsBlocked",
+                                    "5v5InnerSlotShotsOnNetAgainst",
+                                    "5v5PasstoSlotAgainst",
+                                    "5v5NoPressureShotAttemptsFromSlotAgainst",
+                                    "5v5%ofShotAttemptsFromSlotWithNoPressureAgainst",
+                                    "5v5NoPressureShotAttemptsAgainst",
+                                    "5v5%ofShotAttemptsWithNoPressureAgainst",
+                                    "5v5AveragePressureDistanceonPressuredShotAttemptsAgainst",
+                                    "5v5DZMiddleIcePassPreventions",
+                                    "5v5%DZReboundsRecovered",
+                                    "5v52ndChance(Rebound)ShotAttemptsFromSlotAgainst",
+                                    "5v5ShotAttemptsFromSlotOfftheCycleAgainst",
+                                    "5v5ShotsOnNetFromSlotOfftheCycleAgainst",
+                                    "5v5ShotAttemptsFromSlotOfftheRushAgainst",
+                                    "5v5ShotsOnNetFromSlotOfftheRushAgainst",
+                                    "5v5ShotAttemptsFromSlotOfftheForecheckAgainst",
+                                    "5v5ShotsOnNetFromSlotOfftheForecheckAgainst",
+                                    "5v5OddManRushesAgainst",
+                                    "5v5%DZFace-OffsLostResultinginShotAgainst",
+                                    "5v5%DZFace-OffsLostResultinginShotFromSlotAttemptAgainst",
+                                    "5v5ShotAttemptsFromSlotOffofOZPlayAgainst",
+                                    "5v5ShotsOnNetFromSlotOffofOZPlayAgainst")
 
 
-
-`Limiting Scoring-Chances Against` <- c("ES Shot Attempts From Slot Against",
-                                        "ES Shots On Net From Slot Against",
-                                        "ES% of Opposition Shot Attempts Blocked",
-                                        "ES Inner Slot Shots On Net Against",
-                                        "ES Pass to Slot Against",
-                                        "ES No Pressure Shot Attempts From Slot Against",
-                                        "ES% of Shot Attempts From Slot With No Pressure Against",
-                                        "ES No Pressure Shot Attempts Against",
-                                        "ES% of Shot Attempts With No Pressure Against",
-                                        "ES Average Pressure Distance on Pressured Shot Attempts Against",
-                                        "ES DZ Middle Ice Pass Preventions",
-                                        "ES% DZ Rebounds Recovered",
-                                        "ES 2nd Chance (Rebound) Shot Attempts From Slot Against",
-                                        "ES Shot Attempts From Slot Off the Cycle Against",
-                                        "ES Shots On Net From Slot Off the Cycle Against",
-                                        "ES Shot Attempts From Slot Off the Rush Against",
-                                        "ES Shots On Net From Slot Off the Rush Against",
-                                        "ES Shot Attempts From Slot Off the Forecheck Against",
-                                        "ES Shots On Net From Slot Off the Forecheck Against",
-                                        "ES Odd Man Rushes Against",
-                                        "ES% DZ Face-Offs Lost Resulting in Shot Against",
-                                        "ES% DZ Face-Offs Lost Resulting in Shot From Slot Attempt Against",
-                                        "ES Shot Attempts From Slot Off of OZ Play Against",
-                                        "ES Shots On Net From Slot Off of OZ Play Against")
+`LimitingScoring-ChancesAgainst_60`<-c("5v5ShotAttemptsFromSlotAgainst",
+                                       "5v5ShotAttemptsFromSlotAgainst_60",
+                                       "5v5ShotsOnNetFromSlotAgainst",
+                                       "5v5ShotsOnNetFromSlotAgainst_60",
+                                       "5v5%ofOppositionShotAttemptsBlocked",
+                                       "5v5InnerSlotShotsOnNetAgainst",
+                                       "5v5InnerSlotShotsOnNetAgainst_60",
+                                       "5v5PasstoSlotAgainst",
+                                       "5v5PasstoSlotAgainst_60",
+                                       "5v5NoPressureShotAttemptsFromSlotAgainst",
+                                       "5v5NoPressureShotAttemptsFromSlotAgainst_60",
+                                       "5v5NoPressureShotAttemptsAgainst",
+                                       "5v5NoPressureShotAttemptsAgainst_60",
+                                       "5v5%ofShotAttemptsWithNoPressureAgainst",
+                                       "5v5AveragePressureDistanceonPressuredShotAttemptsAgainst",
+                                       "5v5AveragePressureDistanceonPressuredShotAttemptsAgainst_60",
+                                       "5v5DZMiddleIcePassPreventions",
+                                       "5v5DZMiddleIcePassPreventions_60",
+                                       "5v5%DZReboundsRecovered",
+                                       "5v52ndChance(Rebound)ShotAttemptsFromSlotAgainst",
+                                       "5v52ndChance(Rebound)ShotAttemptsFromSlotAgainst_60",
+                                       "5v5ShotAttemptsFromSlotOfftheCycleAgainst",
+                                       "5v5ShotAttemptsFromSlotOfftheCycleAgainst_60",
+                                       "5v5ShotsOnNetFromSlotOfftheCycleAgainst",
+                                       "5v5ShotsOnNetFromSlotOfftheCycleAgainst_60",
+                                       "5v5ShotAttemptsFromSlotOfftheRushAgainst",
+                                       "5v5ShotAttemptsFromSlotOfftheRushAgainst_60",
+                                       "5v5ShotsOnNetFromSlotOfftheRushAgainst",
+                                       "5v5ShotsOnNetFromSlotOfftheRushAgainst_60",
+                                       "5v5ShotAttemptsFromSlotOfftheForecheckAgainst",
+                                       "5v5ShotAttemptsFromSlotOfftheForecheckAgainst_60",
+                                       "5v5ShotsOnNetFromSlotOfftheForecheckAgainst",
+                                       "5v5ShotsOnNetFromSlotOfftheForecheckAgainst_60",
+                                       "5v5OddManRushesAgainst",
+                                       "5v5OddManRushesAgainst_60",
+                                       "5v5%DZFace-OffsLostResultinginShotAgainst",
+                                       "5v5%DZFace-OffsLostResultinginShotFromSlotAttemptAgainst",
+                                       "5v5ShotAttemptsFromSlotOffofOZPlayAgainst",
+                                       "5v5ShotAttemptsFromSlotOffofOZPlayAgainst_60",
+                                       "5v5ShotsOnNetFromSlotOffofOZPlayAgainst",
+                                       "5v5ShotsOnNetFromSlotOffofOZPlayAgainst_60")
 
 `Powerplay`<-c ("5v4GoalsScored",
                 "5v4ExpectedGoalsFor",
@@ -251,7 +296,6 @@ Categories <- c("Expected Goals",
                    "5v4%Face-OffsWonResultinginShotAttemptFromSlot"
 )
 
-
 `PenaltyKill`<-c("4v5GoalsFor",
                  "4v5ExpectedGoalsAgainst",
                  "4v5ActualtoExpectedGoalsAgainst",
@@ -330,112 +374,106 @@ Categories <- c("Expected Goals",
                     #"4v5%DZFace-OffsLostResultinginaShotFromSlotAttemptAgainst"
 )
 
+`CreatingOZPossession-Time`<-c("5v5OZPossessionTime",
+                               "5v5%OZZoneTime",
+                               "5v5OZFace-OffsWins",
+                               "5v5OZFace-OffsWin%",
+                               "5v5%OZFace-OffsLostResultinginCleanDZExitbyOpposition",
+                               "5v5OZTrueTurnover%",
+                               "5v5Dump-InRate",
+                               "5v5OZDump-InAttempts",
+                               "5v5OZDump-InRecoveries",
+                               "5v5%OZDump-InsRecovere",
+                               "5v5%OZDump-InsthatareRimDumps",
+                               "5v5%OZRimDump-InsRecovered",
+                               "5v5%OZDump-InsthatareCross-IceDumps",
+                               "5v5%OZCross-IceDump-InsRecovered",
+                               "5v5%OZDump-InsthatareSameSideDumps",
+                               "5v5%OZSameSideDump-InsRecovered",
+                               "5v5%OZDump-InsthatareSoftDumps",
+                               "5v5%OZSoftDump-InsRecovered",
+                               "5v5%OZRimDump-InOppGoalieRecoveries",
+                               "5v5PressureOZDump-Ins",
+                               "5v5%OZDump-InswithPressure",
+                               "5v5%PressureOZDump-InsRecoveredonForecheck",
+                               "5v5ControlledEntryAttempts",
+                               "5v5SuccessfulControlledEntries",
+                               "5v5ControlledEntrySuccess%",
+                               "5v5ForecheckingSuccess%(OppositionDoesNotReachNZ)",
+                               "5v5SuccessfulForecheckingPlays",
+                               "5v5OZTakeaways(DefLoosePuckRecoveries)",
+                               "5v5TotalOZLoosePuckRecoveries",
+                               "5v5%OZShotAttemptsRecovered",
+                               "5v5OZShotAttemptsRecovered",
+                               "5v5BreakoutExitSuccess%(withOZPossession)",
+                               "5v5ZoneExitSuccess%(withOZPossession)",
+                               "5v5OZContestedLoosePuckRecoveryWin%")
 
 
+`LimitingOZPossession-TimeAgainst`<-c("5v5OppositionOZPossessionTime",
+                                      "5v5DZTrueTurnover%",
+                                      "5v5AverageGaponEntriesAgainst",
+                                      "5v5AverageGaponDump-InsAgainst",
+                                      "5v5Dump-InAttemptsAgainst",
+                                      "5v5Dump-InRateAgainst",
+                                      "5v5DZDump-InRecoveries",
+                                      "5v5%DZDump-InRecovery&Exit",
+                                      "5v5SuccessfulDump-InRecoveriesbyOpposition",
+                                      "5v5%DZDump-InsthatareRimDump-Ins",
+                                      "5v5%DZRimDump-InRecovery&Exit",
+                                      "5v5%DZDump-InsthatareCross-IceDump-Ins",
+                                      "5v5%DZCross-IceDump-InRecovery&Exit",
+                                      "5v5%DZDump-InsthatareSame-SideDump-Ins",
+                                      "5v5%DZSame-SideDump-InRecovery&Exit",
+                                      "5v5%DZDump-InsthatareSoftDump-Ins",
+                                      "5v5%DZSoftDump-InRecovery&Exit",
+                                      "5v5%DZRimDump-InGoalieRecoveries",
+                                      "5v5PressureDZDump-InRecoveries",
+                                      "5v5%DZDump-InRecoveriesUnderPressure",
+                                      "5v5%PressureDZDump-InRecoverieswith1stPlaySuccessful",
+                                      "5v5%PressureDZDump-InRecoverieswithCleanExit",
+                                      "5v5TeamEntryDenialSuccess%",
+                                      "5v5SuccessfulControlledEntriesAgainst",
+                                      "5v5%OppositionShotAttemptsRecoveredbyOpposition",
+                                      "5v5OppositionShotAttemptsRecoveredbyOpposition",
+                                      "5v5DZTakeaways(DefLoosePuckRecoveries)",
+                                      "5v5DZTakeaway%",
+                                      "5v5DZContestedLoosePuckRecoveryWin%",
+                                      "5v5DZFace-OffLosses",
+                                      "5v5DZFace-OffWin%",
+                                      "5v5%DZFace-OffsWonResultinginCleanDZExit",
+                                      "5v5ForecheckingSuccess%(OppositionDoesNotReachYourDZ)",
+                                      "5v5ForecheckingSuccess%(OppositionDoesNotEstablishOZPossession)",
+                                      "5v5NZTakeaways(DefLoosePuckRecoveries)",
+                                      "5v5NZLoosePuckRecoveries",
+                                      "5v5NZDefensivePlays",
+                                      "5v5%LostNZFace-OffswithRecovery",
+                                      "5v5LostNZFace-OffswithRecovery")
 
-
-
-
-`Creating OZ Possession-Time` <- c("ES OZ Possession Time",
-                                   "ES% OZ Zone Time",
-                                   "ES OZ Face-Offs Wins",
-                                   "ES OZ Face-Offs Win%",
-                                   "ES% OZ Face-Offs Lost Resulting in Clean DZ Exit by Opposition",
-                                   "ES OZ True Turnover%",
-                                   "ES Dump-In Rate",
-                                   "ES OZ Dump-In Attempts",
-                                   "ES OZ Dump-In Recoveries",
-                                   "ES% OZ Dump-Ins Recovere",
-                                   "ES% OZ Dump-Ins that are Rim Dumps",
-                                   "ES% OZ Rim Dump-Ins Recovered",
-                                   "ES% OZ Dump-Ins that are Cross-Ice Dumps",
-                                   "ES% OZ Cross-Ice Dump-Ins Recovered",
-                                   "ES% OZ Dump-Ins that are Same Side Dumps",
-                                   "ES% OZ Same Side Dump-Ins Recovered",
-                                   "ES% OZ Dump-Ins that are Soft Dumps",
-                                   "ES% OZ Soft Dump-Ins Recovered",
-                                   "ES% OZ Rim Dump-In Opp Goalie Recoveries",
-                                   "ES Pressure OZ Dump-Ins",
-                                   "ES% OZ Dump-Ins with Pressure",
-                                   "ES% Pressure OZ Dump-Ins Recovered on Forecheck",
-                                   "ES Controlled Entry Attempts",
-                                   "ES Successful Controlled Entries",
-                                   "ES Controlled Entry Success%",
-                                   "ES Forechecking Success% (Opposition Does Not Reach NZ)",
-                                   "ES Successful Forechecking Plays",
-                                   "ES OZ Takeaways (Def Loose Puck Recoveries)",
-                                   "ES Total OZ Loose Puck Recoveries",
-                                   "ES% OZ Shot Attempts Recovered",
-                                   "ES OZ Shot Attempts Recovered",
-                                   "ES Breakout Exit Success% (with OZ Possession)",
-                                   "ES Zone Exit Success% (with OZ Possession)",
-                                   "ES OZ Contested Loose Puck Recovery Win%")
-
-
-`Limiting OZ Possession-Time Against` <- c("ES Opposition OZ Possession Time",
-                                           "ES DZ True Turnover%",
-                                           "ES Average Gap on Entries Against",
-                                           "ES Average Gap on Dump-Ins Against",
-                                           "ES Dump-In Attempts Against",
-                                           "ES Dump-In Rate Against",
-                                           "ES DZ Dump-In Recoveries",
-                                           "ES% DZ Dump-In Recovery & Exit",
-                                           "ES Successful Dump-In Recoveries by Opposition",
-                                           "ES% DZ Dump-Ins that are Rim Dump-Ins",
-                                           "ES% DZ Rim Dump-In Recovery & Exit",
-                                           "ES% DZ Dump-Ins that are Cross-Ice Dump-Ins",
-                                           "ES% DZ Cross-Ice Dump-In Recovery & Exit",
-                                           "ES% DZ Dump-Ins that are Same-Side Dump-Ins",
-                                           "ES% DZ Same-Side Dump-In Recovery & Exit",
-                                           "ES% DZ Dump-Ins that are Soft Dump-Ins",
-                                           "ES% DZ Soft Dump-In Recovery & Exit",
-                                           "ES% DZ Rim Dump-In Goalie Recoveries",
-                                           "ES Pressure DZ Dump-In Recoveries",
-                                           "ES% DZ Dump-In Recoveries Under Pressure",
-                                           "ES% Pressure DZ Dump-In Recoveries with 1st Play Successful",
-                                           "ES% Pressure DZ Dump-In Recoveries with Clean Exit",
-                                           "ES Team Entry Denial Success%",
-                                           "ES Successful Controlled Entries Against",
-                                           "ES% Opposition Shot Attempts Recovered by Opposition",
-                                           "ES Opposition Shot Attempts Recovered by Opposition",
-                                           "ES DZ Takeaways (Def Loose Puck Recoveries)",
-                                           "ES DZ Takeaway%",
-                                           "ES DZ Contested Loose Puck Recovery Win%",
-                                           "ES DZ Face-Off Losses",
-                                           "ES DZ Face-Off Win%",
-                                           "ES% DZ Face-Offs Won Resulting in Clean DZ Exit",
-                                           "ES Forechecking Success% (Opposition Does Not Reach Your DZ)",
-                                           "ES Forechecking Success% (Opposition Does Not Establish OZ Possession)",
-                                           "ES NZ Takeaways (Def Loose Puck Recoveries)",
-                                           "ES NZ Loose Puck Recoveries",
-                                           "ES NZ Defensive Plays",
-                                           "ES% Lost NZ Face-Offs with Recovery",
-                                           "ES Lost NZ Face-Offs with Recovery")
-
-`Puck Management` <- c("ES NZ True Turnover%",
-                       "ES Regroups",
-                       "ES Regroup Quick-Up%",
-                       "ES Regroup to OZ Possession%",
-                       "ES Regroup Resulting in Shot On Net%",
-                       "ES Regroup Resulting in Scoring Chance%",
-                       "ES Regroup Resulting in Dump-In%",
-                       "ES Regroup Resulting in DZ or NZ Turnover%",
-                       "ES Regroup Resulting in Clean OZ Entry%",
-                       "ES Flip Dump-Outs",
-                       "ES Flip Dump-Outs%",
-                       "ES Same-Side Breakout%",
-                       "ES Same-Side Breakout Against%",
-                       "ES Breakout Success% (Reaches NZ)",
-                       "ES Breakout Success% (Reaches OZ)",
-                       "ES Zone Exit Success% (Reaches NZ)",
-                       "ES Zone Exit Success% (Reaches OZ)",
-                       "ES Successful Stretch Passes",
-                       "ES Dump-Out Rate",
-                       "ES Dump-Out Success%",
-                       "ES Icings",
-                       "ES NZ North Pass Completion%",
-                       "ES Outlet Pass Completion%",
-                       "ES D2D Pass Completion%")
+`PuckManagement`<-c("5v5NZTrueTurnover%",
+                    "5v5Regroups",
+                    "5v5RegroupQuick-Up%",
+                    "5v5RegrouptoOZPossession%",
+                    "5v5RegroupResultinginShotOnNet%",
+                    "5v5RegroupResultinginScoringChance%",
+                    "5v5RegroupResultinginDump-In%",
+                    "5v5RegroupResultinginDZorNZTurnover%",
+                    "5v5RegroupResultinginCleanOZEntry%",
+                    "5v5FlipDump-Outs",
+                    "5v5FlipDump-Outs%",
+                    "5v5Same-SideBreakout%",
+                    "5v5Same-SideBreakoutAgainst%",
+                    "5v5BreakoutSuccess%(ReachesNZ)",
+                    "5v5BreakoutSuccess%(ReachesOZ)",
+                    "5v5ZoneExitSuccess%(ReachesNZ)",
+                    "5v5ZoneExitSuccess%(ReachesOZ)",
+                    "5v5SuccessfulStretchPasses",
+                    "5v5Dump-OutRate",
+                    "5v5Dump-OutSuccess%",
+                    "5v5Icings",
+                    "5v5NZNorthPassCompletion%",
+                    "5v5OutletPassCompletion%",
+                    "5v5D2DPassCompletion%")
 
 `Goaltending`<-c("5v5ExpectedGoalsAgainst",
                  "5v5ShotAttemptsAgainst",
@@ -477,6 +515,9 @@ Categories <- c("Expected Goals",
                  "4v5%ShotsOnNetAgainstThatAreScreened",
                  "4v5ScreenedShotsOnNetAgainstNoReboundPercentage")
 
+###########################################3################################
+
+
 #imports all game by game times from the NHL at all strengths
 #also imports team, opponent, Result
 #Look to filter this game down to distict resuts
@@ -495,8 +536,11 @@ rawData <- read.csv("/Users/mprefontaine/True North Sports & Entertainment L/Win
   mutate(GameDate = GameDate %>% as.character %>%  as.Date(format = "%Y-%m-%d")) %>% 
   distinct()
 
+
+##Create a list of teams 
 Team_List <- rawData$Team %>% sort()
 
+#Create a categories 
 Categories <- c("Expected Goals",
                 "Shooting",
                 "Creating Scoring-Chances",
@@ -579,160 +623,113 @@ server <- function(input, output) {
     )
 }
 
-
 shinyApp(ui, server)
 
-#########################5 v5########################################
-CC_Raw <- merge(FiveVFiveRawData, dateTable, by = c("GameDate", "Team")) %>% 
-  select(GameDate,id, SL_id ,Team,Opponent, Outcome, TOI_5v5,everything()) %>% 
-  select(`5v5_info`,`Creating Scoring-Chances`) %>% 
-  distinct()
+#########Function for creating dataframes############
+#This fuciton takes the raw data and merges it to create a full schedule gbg list of metrics
+#Based on the input strength
+#This will also calculate the gbg/60 values for each applicable metric.
+gbg <-function(Data1, Data2,s, GameInfo,OutputInfo, Input, Output, Team2) {
+  TOI2 <- paste0("TOI_",s)
+  merge(Data1, Data2, by = c("GameDate", "Team")) %>% 
+    select(GameInfo,Input, TOI = contains(TOI2)) %>% 
+    mutate_at(vars(-contains("%"),-contains("Rate"), -OutputInfo), funs(`60` = ./TOI*3600)) %>% 
+    select(OutputInfo, Output) %>% 
+    filter(Team == Team2)
+  
+}
 
-CC_60 <- CC_Raw %>% 
-  mutate_at(vars(-contains("%"), -`5v5_info`), funs(`60` = ./TOI_5v5*3600)) %>% 
-  select(`5v5_info`, `Creating Scoring-Chances_60`)
+season <-function(Data1, Data2,s, GameInfo,OutputInfo, Input, Output, Team2) {
+  TOI2 <- paste0("TOI_",s)
+  merge(Data1, Data2, by = c("GameDate", "Team")) %>% 
+    select(-GameDate,-id,-SL_id,-Opponent,-Outcome, TOI = contains(TOI2)) %>%
+    group_by(Team) %>% 
+    summarise_all(sum, na.rm=TRUE) %>% 
+    mutate_at(vars(-contains("%"),-contains("Rate"), -Team), funs(`60` = ./TOI*3600)) %>% 
+    select(Team, Output)
+  
+}
 
-test<- CC_60 %>% 
-  select(contains("_60"), -`5v5_info`) %>% 
-  cor()
+#Run the gbg function 
+  Even_GBG <- gbg(rawData,dateTable,"5v5",`5v5_info`,`Info`,`Powerplay`,`Powerplay_60`, "WPG")
+  PP_GBG <- gbg(rawData,dateTable,"5v4",`5v4_info`,`Info`,`Powerplay`,`Powerplay_60`, "WPG")
+  PK_GBG <- gbg(rawData,dateTable,"4v5",`4v5_info`,`Info`,`PenaltyKill`,`PenaltyKill_60`, "WPG")
+  Even_Season <- season(rawData,dateTable,"5v4",`5v4_info`,`Info`,`Powerplay`,`Powerplay_60`, "WPG")
+  PP_Season <- season(rawData,dateTable,"5v4",`5v4_info`,`Info`,`Powerplay`,`Powerplay_60`, "WPG")
+  PK_Season <- season(rawData,dateTable,"4v5",`4v5_info`,`Info`,`PenaltyKill`,`PenaltyKill_60`, "WPG")
 
-WPG_CC <- CC_60 %>% 
-  filter(Team == "WPG") 
+##Write Data to local directory
+  path <- "/Users/mprefontaine/True North Sports & Entertainment L/Winnipeg Jets Analytics - Documents/General/SL_Compiled"
+  write.csv(PP_GBG, file.path(path, "PP_GBG.csv"), row.names=FALSE)
+  write.csv(PK_GBG, file.path(path, "PK_GBG.csv"), row.names=FALSE)
+  write.csv(PP_Season, file.path(path, "PP_Season.csv"), row.names=FALSE)
+  write.csv(PK_Season, file.path(path, "PK_Season.csv"), row.names=FALSE)
 
+  
+  
+  
+  gbg75 <-function(Data1, Data2,s, GameInfo, OutputInfo, Input, Output, Team2 = NULL ) {
+    TOI2 <- paste0("TOI_",s)
+    merge(Data1, Data2, by = c("GameDate", "Team")) %>%
+      {ifelse(!is.null(Team2), filter(Team == Team2), .)} %>% 
+      select(GameInfo,Input, TOI = contains(TOI2)) %>% 
+      mutate_at(vars(-contains("%"),-contains("Rate"), -OutputInfo), funs(`60` = ./TOI*3600)) %>% 
+      select(OutputInfo, Output)
+  }
 
-write_csv(test, "Cor.csv")
-
-test<- CC_60 %>% 
-  select(contains("_60"), -`5v5_info`) %>% 
-  cor()
-
-##Create a more readable wide data frame
-xGF <- merge(FiveVFiveRawData, dateTable, by = c("GameDate", "Team")) %>% 
-  select(GameDate,id, SL_id ,Team,Opponent, Outcome, TOI_5v5,everything()) %>% 
-  select(`5v5_info`,`Expected Goals`) %>% 
-  # distinct() %>% 
-  mutate_at(vars(contains("ExpectedGoals")), funs(`60` = ./TOI_5v5*3600)) %>% 
-  mutate(`xGF%` = `5v5ExpectedGoalsFor_60`/(`5v5ExpectedGoalsFor_60`+`5v5ExpectedGoalsAgainst_60`))
-
-
-xGF_mean<- xGF %>% 
-  group_by(Team) %>% 
-  summarise_all(mean, na.rm=TRUE)
-
-WPG_xGF <- xGF %>% 
-  filter(Team == "WPG") 
-
-DAL_xGF <- xGF %>% 
-  filter(Team == "DAL") 
-
-###################Powerplay data######################################
-#Combine powerplay Metrics into one data frame giving full NHL gbg breakdown
-PP_Raw <-dateData <- merge(rawData, dateTable, by = c("GameDate", "Team")) %>% 
-  select(GameDate,id, SL_id ,Team ,Opponent, Outcome, TOI_5v4,everything()) %>% 
-  select(`5v4_info`,`Powerplay`) %>% 
-  distinct()
-
-#Adds per 60 mesures to the data frame, good for GBG analysis
-PP_60 <- PP_Raw %>% 
-  mutate_at(vars(-contains("%"), -`5v4_info`), funs(`60` = ./TOI_5v4*3600)) %>% 
-  select(`5v4_info`, `Powerplay_60`)
-
-#Gets season summary of metrics for each team
-PP_sum<- PP_Raw %>% 
-  select(-GameDate,-id,-SL_id,-Opponent,-Outcome) %>% 
-  group_by(Team) %>% 
-  summarise_all(sum, na.rm=TRUE)
-
-#Adds properly calucatled per 60s for each team
-PP_sum_60 <- PP_sum %>% 
-  mutate_at(vars(-contains("%"),-Team), funs(`60` = ./TOI_5v4*3600)) %>% 
-  select(Team, `Powerplay_60`) 
-mutate()
-
-#Winnipeg GBG dataframe
-WPG_PP <- PP_60 %>% 
-  filter(Team == "WPG") 
-
-#Opponent GBG dataframe, change abbreviation
-OPP_PP <- PP_60 %>% 
-  filter(Team == "DAL") 
-
-##Write PP Data to local directory
-write_csv(PP_sum_60, "PPdata.csv")
-
-##Take a look at the collereltion between mutiple Metrics
-PP_Cor<- PP_60 %>% 
-  select(contains("_60"), -`5v4_info`) %>% 
-  cor(use = "complete.obs")
-
-########################################Penalty Kill######################################################
-#Combine PK Metrics into one data frame giving full NHL gbg breakdown
-PK_Raw <- merge(FourVFiveRawData, dateTable, by = c("GameDate", "Team")) %>% 
-  select(GameDate,id, SL_id ,Team ,Opponent, Outcome, TOI_4v5,everything()) %>% 
-  select(`4v5_info`,`PenaltyKill`) %>% 
-  distinct()
-
-#Adds per 60 mesures to the data frame, good for GBG analysis
-PK_60 <- PK_Raw %>% 
-  mutate_at(vars(-contains("%"), -`4v5_info`), funs(`60` = ./TOI_4v5*3600)) %>% 
-  select(`4v5_info`, `PenaltyKill_60`)
-
-#Gets season summary of metrics for each team
-PK_sum<- PK_Raw %>% 
-  select(-GameDate,-id,-SL_id,-Opponent,-Outcome) %>% 
-  group_by(Team) %>% 
-  summarise_all(sum, na.rm=TRUE)
-
-#Adds properly calucatled per 60s for each team
-PK_sum_60 <- PK_sum %>% 
-  mutate_at(vars(-contains("%"),-Team), funs(`60` = ./TOI_4v5*3600)) %>% 
-  select(Team, `PenaltyKill_60`) 
-
-#Winnipeg PK GBG dataframe
-WPG_PK <- PK_60 %>% 
-  filter(Team == "WPG") 
-
-#Winnipeg PK GBG dataframe
-OPP_PK <- PK_60 %>% 
-  filter(Team == "ANA") 
-
-PK_Raw_Time <- PK_60 %>%
-  as_tbl_time(GameDate)
-
-monthly <- PK_Raw_Time %>% 
-  collapse_by(period = "month") %>% 
-  group_by(Team,GameDate) %>%
-  summarise_if(is.numeric, mean, na.rm = TRUE) %>% 
-  filter(GameDate == "2019-11-30") %>%
-  select(Team, `PenaltyKill_60`) 
-
-##Write PP Data to local directory
-write_csv(PK_sum_60, "PKdata.csv")
-write_csv(OPP_PK, "OPP_PK.csv")
-write_csv(WPG_PK, "WPG_PK.csv")
-
-##Take a look at the collereltion between mutiple Metrics
-PK_Cor<- PK_60 %>% 
-  select(contains("_60")) %>% 
-  cor(use = "complete.obs")
-
-###################GOALIE##############################################
-Goalie_Raw <- merge(GoalieRawData, dateTable, by = c("GameDate", "Team")) %>% 
-  select(GameDate,id, SL_id ,Team ,Opponent, Outcome, TOI_4v5,everything()) %>% 
-  select(`5v5_info`,`Goaltending`, TOI_4v5) %>% 
-  distinct()
-
-PP_60 <- PP_Raw %>% 
-  mutate_at(vars(-contains("%"), -`5v5_info`), funs(`60` = ./TOI_5v5*3600)) %>% 
-  select(`5v4_info`, `Powerplay_60`)
+Test1 <- gbg75(rawData,dateTable,"5v4",`5v4_info`,`Info`,`Powerplay`,`Powerplay_60`, "WPG")
+  
 
 
-test2<- PP_60 %>% 
-  select(contains("_60"), -`5v4_info`) %>% 
-  cor(use = "complete.obs")
 
-###########################################
+if (is.null(Team2)){
+  test = Even_Season
+} else {
+  test = Even_Season %>% 
+    filter(Team2) %>% 
+    group_by(MFD) %>% 
+    summarise(MIS03 = n()*1000) %>% 
+    left_join(disp_all,.,by = "MFD") %>% 
+    transmute(MFD ,MIS03 = MIS03/Quantity)
+}
 
+
+
+  
+  
+  
+  {ifelse(!is.null(Team2), filter(Team == Team2), select(`5v5_info`, `Expected Goals`)) }
+
+  
+data.frame(x = 1:5) %>% 
+  filter(if (y=="") x>3 else x<3) %>%  
+  tail(1)
+
+
+  
+  Even_Season %>% 
+    provided(all(cyl > 0), filter(hp == 245)) %>% 
+    provided(any(cyl < 0), select(cyl))
+  
+  
+  
+
+BestWorst<-PP_Season %>%
+  select(`Powerplay_60`,-Team) %>% 
+  summarise_all(c(min,max)) %>% 
+
+
+
+  ##Take a look at the collereltion between mutiple Metrics
+  PP_Cor <- PP_GBG %>% 
+    select(contains("_60"), -`Info`) %>% 
+    cor(use = "complete.obs")
+
+
+write.csv(PP_Cor, file.path(path, "PP_Cor.csv"), row.names=FALSE)
+  
+  
+  
 ############################################################Densiity Plots#######################################################################
 
 "/Users/mprefontaine/True North Sports & Entertainment L/Winnipeg Jets Analytics - Documents/Sportslogiq/SL PS Files/NHL/20192020/Regular/" %>% 
@@ -836,3 +833,143 @@ return.goal.info <- function(PS_File, team_name) {
 
 goals<- return.goal.info(PS_File, "Winnipeg Jets")
 
+
+
+
+#######################################################Original Function creation#################################################################
+#########################5 v5########################################
+CC_Raw <- merge(FiveVFiveRawData, dateTable, by = c("GameDate", "Team")) %>% 
+  select(GameDate,id, SL_id ,Team,Opponent, Outcome, TOI_5v5,everything()) %>% 
+  select(`5v5_info`,`Creating Scoring-Chances`) %>% 
+  distinct()
+
+CC_60 <- CC_Raw %>% 
+  mutate_at(vars(-contains("%"), -`5v5_info`), funs(`60` = ./TOI_5v5*3600)) %>% 
+  select(`5v5_info`, `Creating Scoring-Chances_60`)
+
+test<- CC_60 %>% 
+  select(contains("_60"), -`5v5_info`) %>% 
+  cor()
+
+WPG_CC <- CC_60 %>% 
+  filter(Team == "WPG") 
+
+
+write_csv(test, "Cor.csv")
+
+test<- CC_60 %>% 
+  select(contains("_60"), -`5v5_info`) %>% 
+  cor()
+
+##Create a more readable wide data frame
+xGF <- merge(rawData, dateTable, by = c("GameDate", "Team")) %>% 
+  select(GameDate,id, SL_id ,Team,Opponent, Outcome, TOI_5v5,everything()) %>% 
+  select(`5v5_info`,`Expected Goals`) %>% 
+  # distinct() %>% 
+  mutate_at(vars(contains("ExpectedGoals")), funs(`60` = ./TOI_5v5*3600)) %>% 
+  mutate(`xGF%` = `5v5ExpectedGoalsFor_60`/(`5v5ExpectedGoalsFor_60`+`5v5ExpectedGoalsAgainst_60`))
+
+
+xGF_mean<- xGF %>% 
+  group_by(Team) %>% 
+  summarise_all(mean, na.rm=TRUE)
+
+WPG_xGF <- xGF %>% 
+  filter(Team == "WPG") 
+
+OPP_xGF <- xGF %>% 
+  filter(Team == "DET") 
+
+
+
+######OLD PP##############
+#Combine powerplay Metrics into one data frame giving full NHL gbg breakdown
+PP_Raw <- merge(rawData, dateTable, by = c("GameDate", "Team")) %>% 
+  select(`5v4_info`,`Powerplay`)
+
+#Gets gbg breakdown for entire NHL
+PP_GBG <- PP_Raw %>% 
+  mutate_at(vars(-contains("%"), -`5v4_info`), funs(`60` = ./TOI_5v4*3600)) %>% 
+  select(`5v4_info`, `Powerplay_60`)
+
+#Gets season summary of metrics for each team
+PP_Season<- PP_Raw %>% 
+  select(-GameDate,-id,-SL_id,-Opponent,-Outcome) %>% 
+  group_by(Team) %>% 
+  summarise_all(sum, na.rm=TRUE) %>% 
+  mutate_at(vars(-contains("%"),-Team), funs(`60` = ./TOI_5v4*3600)) %>% 
+  select(Team, `Powerplay_60`) 
+
+#Winnipeg GBG dataframe
+WPG_PP <- PP_GBG %>% 
+  filter(Team == "WPG") 
+
+#Opponent GBG dataframe, change abbreviation
+OPP_PP <- PP_60 %>% 
+  filter(Team == "DET") 
+
+##Write PP Data to local directory
+write_csv(PP_sum_60, "PPdata.csv")
+
+###################GOALIE##############################################
+Goalie_Raw <- merge(GoalieRawData, dateTable, by = c("GameDate", "Team")) %>% 
+  select(GameDate,id, SL_id ,Team ,Opponent, Outcome, TOI_4v5,everything()) %>% 
+  select(`5v5_info`,`Goaltending`, TOI_4v5) %>% 
+  distinct()
+
+PP_60 <- PP_Raw %>% 
+  mutate_at(vars(-contains("%"), -`5v5_info`), funs(`60` = ./TOI_5v5*3600)) %>% 
+  select(`5v4_info`, `Powerplay_60`)
+
+
+test2<- PP_60 %>% 
+  select(contains("_60"), -`5v4_info`) %>% 
+  cor(use = "complete.obs")
+
+###########################################
+
+########################################Penalty Kill######################################################
+#Combine PK Metrics into one data frame giving full NHL gbg breakdown
+PK_Raw <- merge(rawData, dateTable, by = c("GameDate", "Team")) %>% 
+  select(`4v5_info`,`PenaltyKill`)
+
+#Adds per 60 mesures to the data frame, good for GBG analysis
+PK_GBG <- PK_Raw %>% 
+  mutate_at(vars(-contains("%"), -`4v5_info`), funs(`60` = ./TOI_4v5*3600)) %>% 
+  select(`4v5_info`, `PenaltyKill_60`)
+
+#Gets season summary of metrics for each team
+PK_season<- PK_Raw %>% 
+  select(-GameDate,-id,-SL_id,-Opponent,-Outcome) %>% 
+  group_by(Team) %>% 
+  summarise_all(sum, na.rm=TRUE) %>% 
+  mutate_at(vars(-contains("%"),-Team), funs(`60` = ./TOI_4v5*3600)) %>% 
+  select(Team, `PenaltyKill_60`) 
+
+#Winnipeg PK GBG dataframe
+WPG_PK <- PK_60 %>% 
+  filter(Team == "WPG") 
+
+#Winnipeg PK GBG dataframe
+OPP_PK <- PK_60 %>% 
+  filter(Team == "DET") 
+
+PK_Raw_Time <- PK_60 %>%
+  as_tbl_time(GameDate)
+
+monthly <- PK_Raw_Time %>% 
+  collapse_by(period = "month") %>% 
+  group_by(Team,GameDate) %>%
+  summarise_if(is.numeric, mean, na.rm = TRUE) %>% 
+  filter(GameDate == "2019-11-30") %>%
+  select(Team, `PenaltyKill_60`) 
+
+##Write PP Data to local directory
+write_csv(PK_sum_60, "PKdata.csv")
+write_csv(OPP_PK, "OPP_PK.csv")
+write_csv(WPG_PK, "WPG_PK.csv")
+
+##Take a look at the collereltion between mutiple Metrics
+PK_Cor<- PK_60 %>% 
+  select(contains("_60")) %>% 
+  cor(use = "complete.obs")
