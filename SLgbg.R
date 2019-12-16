@@ -1,6 +1,6 @@
 library(tidyverse)
 library(tibbletime)
-#library(tidyquant)
+library(tidyquant)
 library(lubridate)
 library(png)
 library(shiny)
@@ -8,7 +8,6 @@ library(DT)
 library(shinydashboard)
 
 #############################Game Info Categories###########################
-
 `5v5_info` <- c("GameDate",
                 "id",
                 "SL_id",
@@ -52,7 +51,6 @@ library(shinydashboard)
               "TOI_5v5",
               "TOI_5v5")
 #############################Metric Categories###########################
-
 Categories <- c("Expected Goals",
                 "Shooting",
                 "Creating Scoring-Chances",
@@ -70,6 +68,23 @@ Categories <- c("Expected Goals",
                       #"5v5ActualtoExpectedGoalsFor"
                       )
 
+
+
+`ExpectedGoals_5_Game` <- c("5v5ExpectedGoalsFor",
+                            "5v5ExpectedGoalsFor_5_Game",
+                            "5v5ExpectedGoalsAgainst",
+                            "5v5ExpectedGoalsAgainst_5_Game"
+                      #"5v5ActualtoExpectedGoalsFor"
+)
+
+`ExpectedGoals_60` <- c("5v5ExpectedGoalsFor",
+                        "5v5ExpectedGoalsFor_60",
+                      "5v5ExpectedGoalsAgainst",
+                      "5v5ExpectedGoalsAgainst_60"
+                      #"5v5ActualtoExpectedGoalsFor"
+)
+
+###########################Shooting#################################
 `Shooting`<-c("5v5ShotAttemptsFor",
               "5v5ShotAttemptsAgainst",
               "5v5OutsideShotsOnNet",
@@ -82,6 +97,53 @@ Categories <- c("Expected Goals",
               "5v5%Face-OffsWonR5v5ultinginShotOnNet",
               "5v5GoalsScored")
 
+`Shooting_60`<-c("5v5ShotAttemptsFor",
+                 "5v5ShotAttemptsFor_60",
+              "5v5ShotAttemptsAgainst",
+              "5v5ShotAttemptsAgainst_60",
+              "5v5OutsideShotsOnNet",
+              "5v5OutsideShotsOnNet_60",
+              "5v5%ShotAttemptsOnNet",
+              "5v5NoPressureShotAttempts",
+              "5v5NoPressureShotAttempts_60",
+              "5v5%ofShotAttemptsWithNoPr5v5sure",
+              "5v5AveragePressureDistanceonPr5v5suredShotAttempts",
+              "5v5AveragePressureDistanceonPr5v5suredShotAttempts_60",
+              "5v5ScreenedShotsOnNet",
+              "5v5ScreenedShotsOnNet_60",
+              "5v5%ofShotsOnNetThatAreScreened",
+              "5v5%Face-OffsWonR5v5ultinginShotOnNet",
+              "5v5GoalsScored",
+              "5v5GoalsScored_60")
+
+`Shooting_60_Rank`<-c("5v5ShotAttemptsFor",
+                 "5v5ShotAttemptsFor_60",
+                 "5v5ShotAttemptsFor_60_Rank",
+                 "5v5ShotAttemptsAgainst",
+                 "5v5ShotAttemptsAgainst_60",
+                 "5v5ShotAttemptsAgainst_60_Rank",
+                 "5v5OutsideShotsOnNet",
+                 "5v5OutsideShotsOnNet_60",
+                 "5v5OutsideShotsOnNet_60_Rank",
+                 "5v5%ShotAttemptsOnNet",
+                 "5v5NoPressureShotAttempts",
+                 "5v5NoPressureShotAttempts_60",
+                 "5v5NoPressureShotAttempts_60_Rank",
+                 "5v5%ofShotAttemptsWithNoPr5v5sure",
+                 "5v5AveragePressureDistanceonPr5v5suredShotAttempts",
+                 "5v5AveragePressureDistanceonPr5v5suredShotAttempts_60",
+                 "5v5AveragePressureDistanceonPr5v5suredShotAttempts_60_Rank",
+                 "5v5ScreenedShotsOnNet",
+                 "5v5ScreenedShotsOnNet_60",
+                 "5v5ScreenedShotsOnNet_60_Rank",
+                 "5v5%ofShotsOnNetThatAreScreened",
+                 "5v5%Face-OffsWonR5v5ultinginShotOnNet",
+                 "5v5GoalsScored",
+                 "5v5GoalsScored_60",
+                 "5v5GoalsScored_60_Rank")
+
+
+#############################SCORING CHANCES FOR####################################
 `Creating Scoring-Chances`<-c("5v5ExpectedGoalsFor",
                               "5v5ShotAttemptsFromSlotFor",
                               "5v5InnerSlotShotAttemptsFor",
@@ -150,6 +212,71 @@ Categories <- c("Expected Goals",
                                  "5v5ShotsOnNetFromSlotOffofOZPlay",
                                  "5v5ShotsOnNetFromSlotOffofOZPlay_60")
 
+`Creating Scoring-Chances_60_Rank`<-c("5v5ExpectedGoalsFor",
+                                 "5v5ExpectedGoalsFor_60",
+                                 "5v5ExpectedGoalsFor_60_Rank",
+                                 "5v5ShotAttemptsFromSlotFor",
+                                 "5v5ShotAttemptsFromSlotFor_60",
+                                 "5v5ShotAttemptsFromSlotFor_60_Rank",
+                                 "5v5InnerSlotShotAttemptsFor",
+                                 "5v5InnerSlotShotAttemptsFor_60",
+                                 "5v5InnerSlotShotAttemptsFor_60_Rank",
+                                 "5v5ShotsOnNetFromSlot",
+                                 "5v5ShotsOnNetFromSlot_60",
+                                 "5v5ShotsOnNetFromSlot_60_Rank",
+                                 "5v5InnerSlotShotsOnNetFor",
+                                 "5v5InnerSlotShotsOnNetFor_60",
+                                 "5v5InnerSlotShotsOnNetFor_60_Rank",
+                                 "5v5SlotDrivingPlays",
+                                 "5v5SlotDrivingPlays_60",
+                                 "5v5SlotDrivingPlays_60_Rank",
+                                 "5v5PassestotheSlotFor",
+                                 "5v5PassestotheSlotFor_60",
+                                 "5v5PassestotheSlotFor_60_Rank",
+                                 "5v5NoPressureShotAttemptsFromSlot",
+                                 "5v5NoPressureShotAttemptsFromSlot_60",
+                                 "5v5NoPressureShotAttemptsFromSlot_60_Rank",
+                                 "5v5%ofShotAttemptsFromSlotWithNoPressure",
+                                 "5v5ShotAttemptsFromSlotOfftheCycle",
+                                 "5v5ShotAttemptsFromSlotOfftheCycle_60",
+                                 "5v5ShotAttemptsFromSlotOfftheCycle_60_Rank",
+                                 "5v5ShotsOnNetFromSlotOfftheCycle",
+                                 "5v5ShotsOnNetFromSlotOfftheCycle_60",
+                                 "5v5ShotsOnNetFromSlotOfftheCycle_60_Rank",
+                                 "5v5ShotAttemptsFromSlotOfftheRush",
+                                 "5v5ShotAttemptsFromSlotOfftheRush_60",
+                                 "5v5ShotAttemptsFromSlotOfftheRush_60_Rank",
+                                 "5v5ShotsOnNetFromSlotOfftheRush",
+                                 "5v5ShotsOnNetFromSlotOfftheRush_60",
+                                 "5v5ShotsOnNetFromSlotOfftheRush_60_Rank",
+                                 "5v5OddManRushes",
+                                 "5v5OddManRushes_60",
+                                 "5v5OddManRushes_60_Rank",
+                                 "5v5ShotAttemptsFromSlotOfftheForecheck",
+                                 "5v5ShotAttemptsFromSlotOfftheForecheck_60",
+                                 "5v5ShotAttemptsFromSlotOfftheForecheck_60_Rank",
+                                 "5v5ShotsOnNetFromSlotOfftheForecheck",
+                                 "5v5ShotsOnNetFromSlotOfftheForecheck_60",
+                                 "5v5ShotsOnNetFromSlotOfftheForecheck_60_Rank",
+                                 "5v5ReboundsCausedFromOutsideShots",
+                                 "5v5ReboundsCausedFromOutsideShots_60",
+                                 "5v5ReboundsCausedFromOutsideShots_60_Rank",
+                                 "5v5%OZReboundsRecovered",
+                                 "5v5OZReboundsRecovered",
+                                 "5v5OZReboundsRecovered_60",
+                                 "5v5OZReboundsRecovered_60_Rank",
+                                 "5v52ndChance(Rebound)ShotAttemptsFromSlot",
+                                 "5v52ndChance(Rebound)ShotAttemptsFromSlot_60",
+                                 "5v52ndChance(Rebound)ShotAttemptsFromSlot_60_Rank",
+                                 "5v5%Face-OffsWonResultinginShotAttemptFromSlot",
+                                 "5v5ShotAttemptsFromSlotOffofOZPlay",
+                                 "5v5ShotAttemptsFromSlotOffofOZPlay_60",
+                                 "5v5ShotAttemptsFromSlotOffofOZPlay_60_Rank",
+                                 "5v5ShotsOnNetFromSlotOffofOZPlay",
+                                 "5v5ShotsOnNetFromSlotOffofOZPlay_60",
+                                 "5v5ShotsOnNetFromSlotOffofOZPlay_60_Rank")
+
+#############################LIMITING SCORING CHANCES AG######################################
 `LimitingScoring-ChancesAgainst`<-c("5v5ShotAttemptsFromSlotAgainst",
                                     "5v5ShotsOnNetFromSlotAgainst",
                                     "5v5%ofOppositionShotAttemptsBlocked",
@@ -218,6 +345,68 @@ Categories <- c("Expected Goals",
                                        "5v5ShotsOnNetFromSlotOffofOZPlayAgainst",
                                        "5v5ShotsOnNetFromSlotOffofOZPlayAgainst_60")
 
+`LimitingScoring-ChancesAgainst_60_Rank`<-c("5v5ShotAttemptsFromSlotAgainst",
+                                       "5v5ShotAttemptsFromSlotAgainst_60",
+                                       "5v5ShotAttemptsFromSlotAgainst_60_Rank",
+                                       "5v5ShotsOnNetFromSlotAgainst",
+                                       "5v5ShotsOnNetFromSlotAgainst_60",
+                                       "5v5ShotsOnNetFromSlotAgainst_60_Rank",
+                                       "5v5%ofOppositionShotAttemptsBlocked",
+                                       "5v5InnerSlotShotsOnNetAgainst",
+                                       "5v5InnerSlotShotsOnNetAgainst_60",
+                                       "5v5InnerSlotShotsOnNetAgainst_60_Rank",
+                                       "5v5PasstoSlotAgainst",
+                                       "5v5PasstoSlotAgainst_60",
+                                       "5v5PasstoSlotAgainst_60_Rank",
+                                       "5v5NoPressureShotAttemptsFromSlotAgainst",
+                                       "5v5NoPressureShotAttemptsFromSlotAgainst_60",
+                                       "5v5NoPressureShotAttemptsFromSlotAgainst_60_Rank",
+                                       "5v5NoPressureShotAttemptsAgainst",
+                                       "5v5NoPressureShotAttemptsAgainst_60",
+                                       "5v5NoPressureShotAttemptsAgainst_60_Rank",
+                                       "5v5%ofShotAttemptsWithNoPressureAgainst",
+                                       "5v5AveragePressureDistanceonPressuredShotAttemptsAgainst",
+                                       "5v5AveragePressureDistanceonPressuredShotAttemptsAgainst_60",
+                                       "5v5AveragePressureDistanceonPressuredShotAttemptsAgainst_60_Rank",
+                                       "5v5DZMiddleIcePassPreventions",
+                                       "5v5DZMiddleIcePassPreventions_60",
+                                       "5v5DZMiddleIcePassPreventions_60_Rank",
+                                       "5v5%DZReboundsRecovered",
+                                       "5v52ndChance(Rebound)ShotAttemptsFromSlotAgainst",
+                                       "5v52ndChance(Rebound)ShotAttemptsFromSlotAgainst_60",
+                                       "5v52ndChance(Rebound)ShotAttemptsFromSlotAgainst_60_Rank",
+                                       "5v5ShotAttemptsFromSlotOfftheCycleAgainst",
+                                       "5v5ShotAttemptsFromSlotOfftheCycleAgainst_60",
+                                       "5v5ShotAttemptsFromSlotOfftheCycleAgainst_60_Rank",
+                                       "5v5ShotsOnNetFromSlotOfftheCycleAgainst",
+                                       "5v5ShotsOnNetFromSlotOfftheCycleAgainst_60",
+                                       "5v5ShotsOnNetFromSlotOfftheCycleAgainst_60_Rank",
+                                       "5v5ShotAttemptsFromSlotOfftheRushAgainst",
+                                       "5v5ShotAttemptsFromSlotOfftheRushAgainst_60",
+                                       "5v5ShotAttemptsFromSlotOfftheRushAgainst_60_Rank",
+                                       "5v5ShotsOnNetFromSlotOfftheRushAgainst",
+                                       "5v5ShotsOnNetFromSlotOfftheRushAgainst_60",
+                                       "5v5ShotsOnNetFromSlotOfftheRushAgainst_60_Rank",
+                                       "5v5ShotAttemptsFromSlotOfftheForecheckAgainst",
+                                       "5v5ShotAttemptsFromSlotOfftheForecheckAgainst_60",
+                                       "5v5ShotAttemptsFromSlotOfftheForecheckAgainst_60_Rank",
+                                       "5v5ShotsOnNetFromSlotOfftheForecheckAgainst",
+                                       "5v5ShotsOnNetFromSlotOfftheForecheckAgainst_60",
+                                       "5v5ShotsOnNetFromSlotOfftheForecheckAgainst_60_Rank",
+                                       "5v5OddManRushesAgainst",
+                                       "5v5OddManRushesAgainst_60",
+                                       "5v5OddManRushesAgainst_60_Rank",
+                                       "5v5%DZFace-OffsLostResultinginShotAgainst",
+                                       "5v5%DZFace-OffsLostResultinginShotFromSlotAttemptAgainst",
+                                       "5v5ShotAttemptsFromSlotOffofOZPlayAgainst",
+                                       "5v5ShotAttemptsFromSlotOffofOZPlayAgainst_60",
+                                       "5v5ShotAttemptsFromSlotOffofOZPlayAgainst_60_Rank",
+                                       "5v5ShotsOnNetFromSlotOffofOZPlayAgainst",
+                                       "5v5ShotsOnNetFromSlotOffofOZPlayAgainst_60",
+                                       "5v5ShotsOnNetFromSlotOffofOZPlayAgainst_60_Rank")
+
+
+#######################POWER PLAY#################################
 `Powerplay`<-c ("5v4GoalsScored",
                 "5v4ExpectedGoalsFor",
                 "5v4ActualtoExpectedGoalsFor",
@@ -296,6 +485,66 @@ Categories <- c("Expected Goals",
                    "5v4%Face-OffsWonResultinginShotAttemptFromSlot"
 )
 
+`Powerplay_60_Rank`<-c ("5v4GoalsScored",
+                   "5v4GoalsScored_60",
+                   "5v4GoalsScored_60_Rank",
+                   "5v4ExpectedGoalsFor",
+                   "5v4ExpectedGoalsFor_60",
+                   "5v4ExpectedGoalsFor_60_Rank",
+                   "5v4ActualtoExpectedGoalsFor",
+                   #"5v4%ShotAttemptsOnNet",
+                   "5v4ShotAttemptsFromSlotFor",
+                   "5v4ShotAttemptsFromSlotFor_60",
+                   "5v4ShotAttemptsFromSlotFor_60_Rank",
+                   "5v4ShotsOnNetFromSlotFor",
+                   "5v4ShotsOnNetFromSlotFor_60",
+                   "5v4ShotsOnNetFromSlotFor_60_Rank",
+                   "5v4InnerSlotShotsOnNetFor",
+                   "5v4InnerSlotShotsOnNetFor_60",
+                   "5v4InnerSlotShotsOnNetFor_60_Rank",
+                   "5v4OZShotAttemptsRecovered",
+                   "5v4OZShotAttemptsRecovered_60",
+                   "5v4OZShotAttemptsRecovered_60_Rank",
+                   #"5v4%OZShotAttemptsRecovered",
+                   #"5v4%OZReboundsRecovered",
+                   "5v42ndChance(Rebound)ShotAttemptsFromSlot",
+                   "5v42ndChance(Rebound)ShotAttemptsFromSlot_60",
+                   "5v42ndChance(Rebound)ShotAttemptsFromSlot_60_Rank",
+                   "5v4ReboundsCausedFromOutsideShots",
+                   "5v4ReboundsCausedFromOutsideShots_60",
+                   "5v4ReboundsCausedFromOutsideShots_60_Rank",
+                   "5v4NoPressureShotAttempts",
+                   "5v4NoPressureShotAttempts_60",
+                   "5v4NoPressureShotAttempts_60_Rank",
+                   "5v4NoPressureShotAttemptsFromSlot",
+                   "5v4NoPressureShotAttemptsFromSlot_60",
+                   "5v4NoPressureShotAttemptsFromSlot_60_Rank",
+                   #"5v4%ofShotAttemptsWithNoPressure",
+                   #"5v4%ofShotAttemptsFromSlotWithNoPressure",
+                   "5v4ScreenedShotsOnNet",
+                   "5v4ScreenedShotsOnNet_60",
+                   "5v4ScreenedShotsOnNet_60_Rank",
+                   #"5v4%ofShotsOnNetThatAreScreened",
+                   #"5v4TrueShooting%(Goals/ShotAttempts)",
+                   #"5v4%OZZoneTime",
+                   "5v4SlotDrivingPlays",
+                   "5v4SlotDrivingPlays_60",
+                   "5v4SlotDrivingPlays_60_Rank",
+                   "5v4PassestoSlot",
+                   "5v4PassestoSlot_60",
+                   "5v4PassestoSlot_60_Rank",
+                   "5v4ControlledEntrySuccess%",
+                   #"5v4Dump-InRate",
+                   "5v4OZDump-InRecoveries",
+                   "5v4OZDump-InRecoveries_60",
+                   "5v4OZDump-InRecoveries_60_Rank"
+                   #"5v4%OZDump-InsRecovered",
+                   #"5v4OZTurnover%",
+                   #"5v4OZFace-OffsWin%",
+                   #"5v4%Face-OffsWonResultinginShotOnNet",
+                   #"5v4%Face-OffsWonResultinginShotAttemptFromSlot"
+)
+#######################PENALTY KILL########################################
 `PenaltyKill`<-c("4v5GoalsFor",
                  "4v5ExpectedGoalsAgainst",
                  "4v5ActualtoExpectedGoalsAgainst",
@@ -327,7 +576,6 @@ Categories <- c("Expected Goals",
                  "4v5%DZFace-OffsLostResultinginaShotAgainst"
                  #"4v5%DZFace-OffsLostResultinginaShotFromSlotAttemptAgainst"
 )
-
 
 `PenaltyKill_60`<-c("4v5GoalsAgainst",
                     "4v5GoalsAgainst_60",
@@ -374,6 +622,64 @@ Categories <- c("Expected Goals",
                     #"4v5%DZFace-OffsLostResultinginaShotFromSlotAttemptAgainst"
 )
 
+`PenaltyKill_60_Rank`<-c("4v5GoalsAgainst",
+                    "4v5GoalsAgainst_60",
+                    "4v5GoalsAgainst_60_Rank",
+                    "4v5ExpectedGoalsAgainst",
+                    "4v5ExpectedGoalsAgainst_60",
+                    "4v5ExpectedGoalsAgainst_60_Rank",
+                    "4v5ActualtoExpectedGoalsAgainst",
+                    "4v5ActualtoExpectedGoalsAgainst_60",
+                    "4v5ActualtoExpectedGoalsAgainst_60_Rank",
+                    "4v5ShotAttemptsFromSlotAgainst",
+                    "4v5ShotAttemptsFromSlotAgainst_60_Rank",
+                    "4v5InnerSlotShotsOnNetAgainst",
+                    "4v5InnerSlotShotsOnNetAgainst_60",
+                    "4v5InnerSlotShotsOnNetAgainst_60_Rank",
+                    "4v5NoPressureShotAttemptsFromSlotAgainst",
+                    "4v5NoPressureShotAttemptsFromSlotAgainst_60",
+                    "4v5NoPressureShotAttemptsFromSlotAgainst_60_Rank",
+                    #"4v5%ofShotAttemptsFromSlotWithNoPressureAgainst",
+                    "4v5NoPressureShotAttemptsAgainst",
+                    "4v5NoPressureShotAttemptsAgainst_60",
+                    "4v5NoPressureShotAttemptsAgainst_60_Rank",
+                    #"4v5%ofShotAttemptsWithNoPressureAgainst",
+                    "4v5ScreenedShotsOnNetAgainst",
+                    "4v5ScreenedShotsOnNetAgainst_60",
+                    "4v5ScreenedShotsOnNetAgainst_60_Rank",
+                    #"4v5%ofShotsOnNetAgainstThatAreScreened",
+                    "4v5GoalsFor",
+                    "4v5GoalsFor_60",
+                    "4v5GoalsFor_60_Rank",
+                    "4v5DZMiddleIcePassPreventions",
+                    "4v5DZMiddleIcePassPreventions_60",
+                    "4v5DZMiddleIcePassPreventions_60_Rank",
+                    "4v5PassestotheSlotAgainst",
+                    "4v5PassestotheSlotAgainst_60",
+                    "4v5PassestotheSlotAgainst_60_Rank",
+                    #"4v5%ofOppositionShotAttemptsBlocked",
+                    #"4v5%DZReboundsRecovered",
+                    #"4v5DZEntryDenialSuccess%",
+                    #"4v5Dump-InRecoveryExitSuccess%",
+                    #"4v5%DZZoneTime",
+                    #"4v5DZTrueTurnover%",
+                    #"4v5DZTrueTakeaway%",
+                    #"4v5Dump-OutRate",
+                    #"4v5Dump-OutSuccess%",
+                    "4v5DZLoosePuckRecoveries",
+                    "4v5DZLoosePuckRecoveries_60",
+                    "4v5DZLoosePuckRecoveries_60_Rank",
+                    "4v5OppositionShotAttemptsRecoveredbyOpposition",
+                    "4v5OppositionShotAttemptsRecoveredbyOpposition_60",
+                    "4v5OppositionShotAttemptsRecoveredbyOpposition_60_Rank",
+                    #"4v5%OppositionShotAttemptsRecoveredbyOpposition",
+                    "4v5DZFace-OffsWin%"
+                    #"4v5%DZFace-OffsWonResultinginCleanDZExit",
+                    #"4v5%DZFace-OffsLostResultinginaShotAgainst"
+                    #"4v5%DZFace-OffsLostResultinginaShotFromSlotAttemptAgainst"
+)
+
+#######################POSSESION TIME########################################
 `CreatingOZPossession-Time`<-c("5v5OZPossessionTime",
                                "5v5%OZZoneTime",
                                "5v5OZFace-OffsWins",
@@ -450,6 +756,7 @@ Categories <- c("Expected Goals",
                                       "5v5%LostNZFace-OffswithRecovery",
                                       "5v5LostNZFace-OffswithRecovery")
 
+############################PUCK MANAGEMENT######################################
 `PuckManagement`<-c("5v5NZTrueTurnover%",
                     "5v5Regroups",
                     "5v5RegroupQuick-Up%",
@@ -474,7 +781,7 @@ Categories <- c("Expected Goals",
                     "5v5NZNorthPassCompletion%",
                     "5v5OutletPassCompletion%",
                     "5v5D2DPassCompletion%")
-
+############################GOALTENDING######################################
 `Goaltending`<-c("5v5ExpectedGoalsAgainst",
                  "5v5ShotAttemptsAgainst",
                  "Goalie5v5Save%",
@@ -516,8 +823,6 @@ Categories <- c("Expected Goals",
                  "4v5ScreenedShotsOnNetAgainstNoReboundPercentage")
 
 ###########################################3################################
-
-
 #imports all game by game times from the NHL at all strengths
 #also imports team, opponent, Result
 #Look to filter this game down to distict resuts
@@ -536,8 +841,7 @@ rawData <- read.csv("/Users/mprefontaine/True North Sports & Entertainment L/Win
   mutate(GameDate = GameDate %>% as.character %>%  as.Date(format = "%Y-%m-%d")) %>% 
   distinct()
 
-
-##Create a list of teams 
+#######################Create a list of teams################
 Team_List <- rawData$Team %>% sort()
 
 #Create a categories 
@@ -629,14 +933,13 @@ shinyApp(ui, server)
 #This fuciton takes the raw data and merges it to create a full schedule gbg list of metrics
 #Based on the input strength
 #This will also calculate the gbg/60 values for each applicable metric.
-gbg <-function(Data1, Data2,s, GameInfo,OutputInfo, Input, Output, Team2) {
+gbg <-function(Data1, Data2,s, GameInfo, OutputInfo, Input, Output, Team2 = NULL ) {
   TOI2 <- paste0("TOI_",s)
-  merge(Data1, Data2, by = c("GameDate", "Team")) %>% 
+  merge(Data1, Data2, by = c("GameDate", "Team")) %>%
+    {if (!is.null(Team2)) filter(., Team == Team2) else .} %>% 
     select(GameInfo,Input, TOI = contains(TOI2)) %>% 
     mutate_at(vars(-contains("%"),-contains("Rate"), -OutputInfo), funs(`60` = ./TOI*3600)) %>% 
-    select(OutputInfo, Output) %>% 
-    filter(Team == Team2)
-  
+    select(OutputInfo, Output)
 }
 
 season <-function(Data1, Data2,s, GameInfo,OutputInfo, Input, Output, Team2) {
@@ -645,90 +948,134 @@ season <-function(Data1, Data2,s, GameInfo,OutputInfo, Input, Output, Team2) {
     select(-GameDate,-id,-SL_id,-Opponent,-Outcome, TOI = contains(TOI2)) %>%
     group_by(Team) %>% 
     summarise_all(sum, na.rm=TRUE) %>% 
-    mutate_at(vars(-contains("%"),-contains("Rate"), -Team), funs(`60` = ./TOI*3600)) %>% 
+    mutate_at(vars(-contains("%"),-contains("Rate"), -Team), funs(`60` = ./TOI*3600)) %>%
+    mutate_at(vars(-Team), funs(`Rank` = rank(-.))) %>% 
     select(Team, Output)
-  
 }
 
 #Run the gbg function 
   Even_GBG <- gbg(rawData,dateTable,"5v5",`5v5_info`,`Info`,`Powerplay`,`Powerplay_60`, "WPG")
-  PP_GBG <- gbg(rawData,dateTable,"5v4",`5v4_info`,`Info`,`Powerplay`,`Powerplay_60`, "WPG")
-  PK_GBG <- gbg(rawData,dateTable,"4v5",`4v5_info`,`Info`,`PenaltyKill`,`PenaltyKill_60`, "WPG")
+  PP_GBG_WPG <- gbg(rawData,dateTable,"5v4",`5v4_info`,`Info`,`Powerplay`,`Powerplay_60`, "WPG")
+  PK_GBG_WPG <- gbg(rawData,dateTable,"4v5",`4v5_info`,`Info`,`PenaltyKill`,`PenaltyKill_60`, "WPG")
+  PP_GBG_NHL <- gbg(rawData,dateTable,"5v4",`5v4_info`,`Info`,`Powerplay`,`Powerplay_60`)
+  PK_GBG_NHL <- gbg(rawData,dateTable,"4v5",`4v5_info`,`Info`,`PenaltyKill`,`PenaltyKill_60`)
   Even_Season <- season(rawData,dateTable,"5v4",`5v4_info`,`Info`,`Powerplay`,`Powerplay_60`, "WPG")
-  PP_Season <- season(rawData,dateTable,"5v4",`5v4_info`,`Info`,`Powerplay`,`Powerplay_60`, "WPG")
-  PK_Season <- season(rawData,dateTable,"4v5",`4v5_info`,`Info`,`PenaltyKill`,`PenaltyKill_60`, "WPG")
+  PP_Season <- season(rawData,dateTable,"5v4",`5v4_info`,`Info`,`Powerplay`,`Powerplay_60_Rank`, "WPG")
+  PK_Season <- season(rawData,dateTable,"4v5",`4v5_info`,`Info`,`PenaltyKill`,`PenaltyKill_60_Rank`, "WPG")
 
-##Write Data to local directory
+##################################Write Files##############################
   path <- "/Users/mprefontaine/True North Sports & Entertainment L/Winnipeg Jets Analytics - Documents/General/SL_Compiled"
-  write.csv(PP_GBG, file.path(path, "PP_GBG.csv"), row.names=FALSE)
-  write.csv(PK_GBG, file.path(path, "PK_GBG.csv"), row.names=FALSE)
+  ###GBG####
+  write.csv(PP_GBG_WPG, file.path(path, "PP_GBG_WPG.csv"), row.names=FALSE)
+  write.csv(PK_GBG_WPG, file.path(path, "PK_GBG_WPG.csv"), row.names=FALSE)
+  write.csv(PP_GBG_NHL, file.path(path, "PP_GBG_NHL.csv"), row.names=FALSE)
+  write.csv(PK_GBG_NHL, file.path(path, "PK_GBG_NHL.csv"), row.names=FALSE)
+  ####Season###
   write.csv(PP_Season, file.path(path, "PP_Season.csv"), row.names=FALSE)
   write.csv(PK_Season, file.path(path, "PK_Season.csv"), row.names=FALSE)
-
+  ###Correlation####
+  write.csv(PP_Cor, file.path(path, "PP_Cor_NHL.csv"), row.names=TRUE)
+  write.csv(PK_Cor, file.path(path, "PK_Cor_NHL.csv"), row.names=TRUE)
   
-  
-  
-  gbg75 <-function(Data1, Data2,s, GameInfo, OutputInfo, Input, Output, Team2 = NULL ) {
-    TOI2 <- paste0("TOI_",s)
-    merge(Data1, Data2, by = c("GameDate", "Team")) %>%
-      {ifelse(!is.null(Team2), filter(Team == Team2), .)} %>% 
-      select(GameInfo,Input, TOI = contains(TOI2)) %>% 
-      mutate_at(vars(-contains("%"),-contains("Rate"), -OutputInfo), funs(`60` = ./TOI*3600)) %>% 
-      select(OutputInfo, Output)
-  }
-
-Test1 <- gbg75(rawData,dateTable,"5v4",`5v4_info`,`Info`,`Powerplay`,`Powerplay_60`, "WPG")
-  
-
-
-
-if (is.null(Team2)){
-  test = Even_Season
-} else {
-  test = Even_Season %>% 
-    filter(Team2) %>% 
-    group_by(MFD) %>% 
-    summarise(MIS03 = n()*1000) %>% 
-    left_join(disp_all,.,by = "MFD") %>% 
-    transmute(MFD ,MIS03 = MIS03/Quantity)
-}
-
+  write.csv(PP_rank, file.path(path, "PP_season_rank.csv"), row.names=TRUE)
 
 
   
   
   
-  {ifelse(!is.null(Team2), filter(Team == Team2), select(`5v5_info`, `Expected Goals`)) }
-
   
-data.frame(x = 1:5) %>% 
-  filter(if (y=="") x>3 else x<3) %>%  
-  tail(1)
-
-
-  
-  Even_Season %>% 
-    provided(all(cyl > 0), filter(hp == 245)) %>% 
-    provided(any(cyl < 0), select(cyl))
-  
-  
-  
-
-BestWorst<-PP_Season %>%
+  BestWorst<-PP_Season %>%
   select(`Powerplay_60`,-Team) %>% 
   summarise_all(c(min,max)) %>% 
-
-
-
-  ##Take a look at the collereltion between mutiple Metrics
-  PP_Cor <- PP_GBG %>% 
-    select(contains("_60"), -`Info`) %>% 
+#########################CORRELATION STUFF######################################  
+##Take a look at the collereltion between mutiple Metrics
+  PP_Cor <- PP_GBG_NHL %>% 
+    #select(contains("_60"), -`Info`) %>% 
+    select(-contains("%"), -`Info`) %>% 
     cor(use = "complete.obs")
 
 
+PK_Cor <- PK_GBG_NHL %>% 
+  #select(contains("_60"), -`Info`) %>% 
+  select(-contains("%"), -`Info`) %>% 
+  cor(use = "complete.obs")
+
 write.csv(PP_Cor, file.path(path, "PP_Cor.csv"), row.names=FALSE)
+
+
+#####################ROll MEAN FUCTION###################
+rollmean <- function(data){
+  rm5 <-data %>% 
+    select(-id,-SL_id)%>% 
+    rename_at(vars(-GameDate), ~ paste0(.,"_05GM")) %>% 
+    tq_transmute(
+      select = -contains("60"),
+      mutate_fun = rollapply,
+      width      = 5,
+      align      = "right",
+      FUN        = sum,
+      na.rm      = TRUE,
+      )%>% 
+    mutate_at(vars(-contains("%"),-contains("Rate"), -GameDate, -TOI_05GM), funs(`60` = ./TOI_05GM*3600))
+  rm10 <- data %>% 
+    select(-id,-SL_id)%>% 
+    rename_at(vars(-GameDate), ~ paste0(.,"_10GM")) %>% 
+    tq_transmute(
+      select = -contains("60"),
+      mutate_fun = rollapply,
+      width      = 10,
+      align      = "right",
+      FUN        = sum,
+      na.rm      = TRUE,
+    )%>% 
+    mutate_at(vars(-contains("%"),-contains("Rate"), -GameDate, -TOI_10GM), funs(`60` = ./TOI_10GM*3600))
+  rm15 <- data %>% 
+    select(-id,-SL_id)%>% 
+    rename_at(vars(-GameDate), ~ paste0(.,"_15GM")) %>% 
+    tq_transmute(
+      select = -contains("60"),
+      mutate_fun = rollapply,
+      width      = 15,
+      align      = "right",
+      FUN        = sum,
+      na.rm      = TRUE,
+    ) %>% 
+    mutate_at(vars(-contains("%"),-contains("Rate"), -GameDate, -TOI_15GM), funs(`60` = ./TOI_15GM*3600)) 
   
-  
+  Reduce(function(...) merge(..., all=TRUE), list(rm5, rm10, rm15)) %>% 
+  select(sort(names(.))) %>% 
+  select(GameDate, contains("TOI"), everything())
+  }
+
+PK_Roll = PK_GBG %>% 
+  rollmean() %>%
+  merge(PK_GBG) %>% 
+  select(`Info`, everything(), -contains("%"))
+
+
+
+
+PP_Roll = PP_GBG %>% 
+  rollmean() %>%
+  merge(PP_GBG) %>% 
+  select(`Info`, everything(), -contains("%"))
+
+
+PP_CUM <- PP_GBG %>% 
+  mutate_at(vars(-Info), funs(`Cum` = cumsum(!is.na(.)))) %>% 
+  select(Info, everything())
+
+
+PP_CUM <- PP_GBG %>% 
+  mutate(cumsum1 = cumsum(replace_na(.,"5v4GoalsScored")))
+
+
+ the <- cumsum1 = cumsum(replace_na(PP_GBG,"5v4GoalsScored"))
+
+write.csv(PK_Roll, file.path(path, "PK_Roll.csv"), row.names=FALSE)
+write.csv(PP_Roll, file.path(path, "PP_Roll.csv"), row.names=FALSE)
+
+
   
 ############################################################Densiity Plots#######################################################################
 
@@ -836,7 +1183,6 @@ goals<- return.goal.info(PS_File, "Winnipeg Jets")
 
 
 
-#######################################################Original Function creation#################################################################
 #########################5 v5########################################
 CC_Raw <- merge(FiveVFiveRawData, dateTable, by = c("GameDate", "Team")) %>% 
   select(GameDate,id, SL_id ,Team,Opponent, Outcome, TOI_5v5,everything()) %>% 
@@ -861,7 +1207,7 @@ test<- CC_60 %>%
   select(contains("_60"), -`5v5_info`) %>% 
   cor()
 
-##Create a more readable wide data frame
+##############################Expected Goals###############
 xGF <- merge(rawData, dateTable, by = c("GameDate", "Team")) %>% 
   select(GameDate,id, SL_id ,Team,Opponent, Outcome, TOI_5v5,everything()) %>% 
   select(`5v5_info`,`Expected Goals`) %>% 
@@ -869,19 +1215,21 @@ xGF <- merge(rawData, dateTable, by = c("GameDate", "Team")) %>%
   mutate_at(vars(contains("ExpectedGoals")), funs(`60` = ./TOI_5v5*3600)) %>% 
   mutate(`xGF%` = `5v5ExpectedGoalsFor_60`/(`5v5ExpectedGoalsFor_60`+`5v5ExpectedGoalsAgainst_60`))
 
-
 xGF_mean<- xGF %>% 
   group_by(Team) %>% 
   summarise_all(mean, na.rm=TRUE)
 
 WPG_xGF <- xGF %>% 
-  filter(Team == "WPG") 
+  filter(Team == "WPG") %>% 
+  mutate(, mean_5 = rolling_mean("5v5ExpectedGoalsFor"))
 
 OPP_xGF <- xGF %>% 
   filter(Team == "DET") 
 
 
+rolling_mean <- rollify(mean, window = 5)
 
+rolling_mean
 ######OLD PP##############
 #Combine powerplay Metrics into one data frame giving full NHL gbg breakdown
 PP_Raw <- merge(rawData, dateTable, by = c("GameDate", "Team")) %>% 
